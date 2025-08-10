@@ -5,21 +5,22 @@ function handleIncrement(event, count, setCount) {
   event.preventDefault();
   console.log("Before Updating State\nCount: " + count);
   
-  // SAFE: Primitives are already immutable
-  // setCount(count + 1);  
+ // Note: When a value is passed to the setState function, React will REPLACE the current state with the new (+1) value twice
+  // Hence, the value will be incremented only once
 
-  // NOT SAFE: Reference-type values like objects are mutable
-  // NOTE: React won't recognize change in state since, reference remains the same
+  // setCount({ ...count, counter: count.counter + 1 });
+  // setCount({ ...count, counter: count.counter + 1 });
 
-  // count.counter = count.counter + 1;
-  // setCount(count);
+  // Note: When a callback is passed to the setState function, React will ensure the latest state is passed as argument each time
+  // Hence, the value will be incremented twice
 
-  // NOTE: Creating a new reference-type value will solve the above issue 
+  setCount((prevCount) => ({ ...count, counter: prevCount.counter + 1 }));
+  setCount((prevCount) => ({ ...count, counter: prevCount.counter + 1 }));
 
-  const newCount = { ...count, counter: count.counter + 1 };
-  setCount(newCount);
+  // Note: There are two setState calls in the above example but the component re-renders only once
+  // Wherever possible, React batches the state updates
 
-  console.log("After Updating State\nCount: " + count);
+  console.log("After Updating State\nCount: " + JSON.stringify(count));
 }
 
 export function Counter() {
