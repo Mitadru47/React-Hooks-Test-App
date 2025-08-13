@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Counter } from "./Counter";
+import { Clock } from "./Clock";
 
 function handleIncrement(event, count, setCount) {
 
@@ -42,6 +43,7 @@ function App() {
       <hr></hr>
 
       <Counter />
+      <Clock />
 
     </div>
   );
