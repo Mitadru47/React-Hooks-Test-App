@@ -27,9 +27,8 @@ export function Counter() {
 
   const [ count, setCount ] = useState({ name: "Child State Count Object", counter: 0 });
   const [ inputElementState, setInputElementState ] = useState("");
-
-  useEffect(() => console.log("CHILD COMPONENT FIRST RENDER!"), []);
-  useEffect(() => console.log("CHILD COMPONENT RE-RENDERED!\nCount: " + JSON.stringify(count)), [count]);
+  
+  useEffect(() => console.log("CHILD COMPONENT RENDERED!\nCount: " + JSON.stringify(count)), [count]);
 
   return(
 

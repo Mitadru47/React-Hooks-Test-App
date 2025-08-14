@@ -28,9 +28,7 @@ function handleIncrement(event, count, setCount) {
 function App() {
 
   const [ parentCount, setParentCount ] = useState({ name: "Parent State Count Object", counter: 0 });
-  
-  useEffect(() => console.log("PARENT COMPONENT FIRST RENDER!"), []);
-  useEffect(() => console.log("PARENT COMPONENT RE-RENDERED!\nParent Count: " + JSON.stringify(parentCount)), [parentCount]);
+  useEffect(() => console.log("PARENT COMPONENT RENDERED!\nParent Count: " + JSON.stringify(parentCount)), [parentCount]);
 
   return (
 

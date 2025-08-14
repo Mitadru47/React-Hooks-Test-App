@@ -1,17 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Clock() {
 
   const [ secondsCounter, setSecondsCounter ] = useState(0);
-  console.log("CLOCK COMPONENT RE-RENDERED!\nSecond Counter: " + secondsCounter);
 
-  // The setInterval() method calls a function at specified intervals (in milliseconds)
-  setInterval(() => {
+  // The block within the useEffect hook is moved outside the rendering calculation and is solely dictated by the dependency array
+  // Hence, the name "Side Effect"
 
-    console.log("SET INTERVAL RESOLVED!\nSecond Counter: " + secondsCounter);
-    setSecondsCounter(secondsCounter + 1);
+  // A blank dependency array will only trigger the side effect once on first-render
+  // A dependency array with a state variable will trigger the side effect on both first-render as well as any time the state changes
 
-  }, 10000);  // 10s for better logging/understanding
+  useEffect(() => console.log("FIRST RENDER EXCLUSIVE LOG!\nEmpty dependency array test - useEffect"), []);
+  useEffect(() => console.log("CLOCK COMPONENT RENDERED!\nSeconds Counter: " + secondsCounter), [ secondsCounter ]);
+
+  useEffect(() => {
+
+    // The setInterval() method calls a function at specified intervals (in milliseconds)
+    setInterval(() => {
+
+      console.log("SET INTERVAL RESOLVED!\nSeconds Counter when setInterval was triggered: " + secondsCounter);
+      setSecondsCounter(prevSecondsCounter => prevSecondsCounter + 10);
+
+    }, 10000);  // 10s for better logging/understanding
+
+  }, []);
 
   return(
 
