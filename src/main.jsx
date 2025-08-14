@@ -5,8 +5,11 @@ import App from './components/App'
 
 createRoot(document.getElementById('root')).render(
 
-  // <StrictMode>
+  <StrictMode>
     <App />
 
-  // </StrictMode>
+  </StrictMode>
 );
+
+// React StrictMode: ENABLED
+// Components will re-run Effects an extra time to find bugs caused by missing Effect cleanup.
