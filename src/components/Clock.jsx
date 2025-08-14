@@ -16,12 +16,14 @@ export function Clock() {
   useEffect(() => {
 
     // The setInterval() method calls a function at specified intervals (in milliseconds)
-    setInterval(() => {
+    const intervalID = setInterval(() => {
 
-      console.log("SET INTERVAL RESOLVED!\nSeconds Counter when setInterval was triggered: " + secondsCounter);
+      console.log("SET INTERVAL RESOLVED!\nsetInterval ID: " + intervalID);
       setSecondsCounter(prevSecondsCounter => prevSecondsCounter + 10);
 
     }, 10000);  // 10s for better logging/understanding
+
+    return () => clearInterval(intervalID); // Clean-Up Function
 
   }, []);
 
